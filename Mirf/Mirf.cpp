@@ -130,7 +130,7 @@ void Nrf24l::setTADDR(uint8_t * adr)
 	writeRegister(TX_ADDR,adr,mirf_ADDR_LEN);
 }
 
-extern bool Nrf24l::dataReady() 
+bool Nrf24l::dataReady() 
 // Checks if data is available for reading
 {
     // See note in getData() function - just checking RX_DR isn't good enough
@@ -142,7 +142,7 @@ extern bool Nrf24l::dataReady()
     return !rxFifoEmpty();
 }
 
-extern bool Nrf24l::rxFifoEmpty(){
+bool Nrf24l::rxFifoEmpty(){
 	uint8_t fifoStatus;
 
 	readRegister(FIFO_STATUS,&fifoStatus,sizeof(fifoStatus));
@@ -151,7 +151,7 @@ extern bool Nrf24l::rxFifoEmpty(){
 
 
 
-extern void Nrf24l::getData(uint8_t * data) 
+void Nrf24l::getData(uint8_t * data) 
 // Reads payload bytes into data array
 {
     csnLow();                               // Pull down chip select
